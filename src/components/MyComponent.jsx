@@ -7,31 +7,43 @@ class MyComponent extends React.Component {
     age: 28,
   };
 
-  handleClick(event) {
-    console.log(">>> check event: ", event.target);
+  // handleClick(event) {
+  //   console.log(">>> check event: ", event.target);
 
+  //   this.setState({
+  //     name: "Kin",
+  //     age: Math.floor(Math.random() * 100) + 1,
+  //   });
+  // }
+
+  handleOnChangeInput = (event) => {
     this.setState({
-      name: "Kin",
-      age: Math.floor(Math.random() * 100) + 1,
+      name: event.target.value,
     });
-  }
+  };
 
-  handleOnMouseOver(event) {
-    // console.log(">>> check onMouseOver: ", event.pageX);
-  }
+  handleOnSubmit = (event) => {
+    event.preventDefault(); // no load page
+    console.log(this.state);
+  };
 
   render() {
     return (
       <div>
         My name is {this.state.name} and I'm {this.state.age}
-        <button onMouseOver={this.handleOnMouseOver}>Hover me</button>
-        <button
-          onClick={(event) => {
-            this.handleClick(event);
+        <form
+          onSubmit={(event) => {
+            this.handleOnSubmit(event);
           }}
         >
-          Click me
-        </button>
+          <input
+            type="text"
+            onChange={(event) => {
+              this.handleOnChangeInput(event);
+            }}
+          />
+          <button>Submit</button>
+        </form>
       </div>
     );
   }
