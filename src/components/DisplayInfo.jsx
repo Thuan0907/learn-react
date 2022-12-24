@@ -19,7 +19,6 @@ class DisplayInfo extends React.Component {
 
     return (
       <div className="display-info-container">
-        <img src={logo} alt="" />
         <div>
           <span
             onClick={() => {
@@ -30,23 +29,34 @@ class DisplayInfo extends React.Component {
               ? "Hide list Users"
               : "Show list Users"}
           </span>
+          {this.state.isShowListUser && (
+            <>
+              {listUsers.map((user) => {
+                return (
+                  <div
+                    key={user.id}
+                    className={+user.age > 20 ? "greenyellow" : "red"}
+                  >
+                    <div>My name's {user.name}</div>
+                    <div>My age's {user.age}</div>
+                    <div>
+                      <button
+                        onClick={() => {
+                          this.props.handleDeleteUser(user.id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                    <hr />
+                  </div>
+                );
+              })}
+            </>
+          )}
         </div>
-        {this.state.isShowListUser && (
-          <>
-            {listUsers.map((user) => {
-              return (
-                <div
-                  key={user.id}
-                  className={+user.age > 20 ? "greenyellow" : "red"}
-                >
-                  <div>My name's {user.name}</div>
-                  <div>My age's {user.age}</div>
-                  <hr />
-                </div>
-              );
-            })}
-          </>
-        )}
+
+        <img src={logo} alt="" />
       </div>
     );
   }
