@@ -4,10 +4,22 @@ import logo from "./../logo.svg";
 
 class DisplayInfo extends React.Component {
   constructor(props) {
+    console.log(">>> call constructor: 1");
     super(props);
     this.state = {
       isShowListUser: true,
     };
+  }
+
+  componentDidMount() {
+    console.log(">>> call me componentDidMount");
+    setTimeout(() => {
+      document.title = "Minh Thuan";
+    }, 3000);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(">>> call me componentDidUpdate", this.props, prevProps);
   }
 
   handleShowHide = () => {
@@ -17,6 +29,7 @@ class DisplayInfo extends React.Component {
   };
 
   render() {
+    console.log(">>> call me render");
     // destructuring array/object
     const { listUsers } = this.props; // props is object
 
