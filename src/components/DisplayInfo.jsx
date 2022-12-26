@@ -20,6 +20,11 @@ class DisplayInfo extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     console.log(">>> call me componentDidUpdate", this.props, prevProps);
+    if (this.props.listUsers !== prevProps.listUsers) {
+      if (this.props.listUsers.length === 5) {
+        alert("you got 5 users");
+      }
+    }
   }
 
   handleShowHide = () => {
