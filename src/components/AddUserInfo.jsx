@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 // class AddUserInfo extends React.Component {
 //   state = {

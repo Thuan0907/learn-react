@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./DisplayInfo.scss";
-import logo from "./../logo.svg";
+// import logo from "./../logo.svg";
 
 // class DisplayInfo extends React.Component {
 //   render() {
@@ -97,7 +97,7 @@ const DisplayInfo = (props) => {
         )}
       </div>
 
-      <img src={logo} alt="" />
+      {/* <img src={logo} alt="" /> */}
     </div>
   );
 };
