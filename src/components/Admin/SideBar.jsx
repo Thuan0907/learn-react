@@ -47,7 +47,7 @@ const SideBar = (props) => {
             }}
           >
             <DiReact size={"3em"} color={"00bfff"} />
-            <span>Hoi Dan IT</span>
+            <span>Minh Thuan Dev</span>
           </div>
         </SidebarHeader>
 

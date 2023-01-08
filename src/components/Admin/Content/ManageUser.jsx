@@ -1,5 +1,6 @@
 import React from "react";
 import ModalCreateUser from "./ModalCreateUser";
+import "./ManageUser.scss";
 
 export default function ManageUser() {
   return (
@@ -8,10 +9,8 @@ export default function ManageUser() {
       <div className="users-content">
         <div>
           <button>Add new users</button>
-          <div>
-            Table users
-            <ModalCreateUser />
-          </div>
+          <div>Table users</div>
+          <ModalCreateUser />
         </div>
       </div>
     </div>
