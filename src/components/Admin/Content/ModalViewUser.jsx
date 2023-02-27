@@ -3,12 +3,10 @@ import { FcPlus } from "react-icons/fc";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { toast } from "react-toastify";
-import { putUpdateUser } from "../../../services/apiService";
 import { useEffect } from "react";
 import _ from "lodash";
 
-const ModalUpdateUser = (props) => {
+const ModalViewUser = (props) => {
   const { show, setShow, dataUpdate } = props;
 
   const handleClose = () => {
@@ -19,7 +17,6 @@ const ModalUpdateUser = (props) => {
     setRole("USER");
     setImage("");
     setPreviewImage("");
-    props.resetUpdateData();
   };
   const handleShow = () => setShow(true);
 
@@ -49,34 +46,6 @@ const ModalUpdateUser = (props) => {
       setImage(e.target.files[0]);
     } else {
       // setPreviewImage("");
-    }
-  };
-
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-
-  const handleSubmitCreateUser = async () => {
-    // validate
-    const isValidEmail = validateEmail(email);
-
-    if (!isValidEmail) {
-      toast.error("Invalid Email");
-      return;
-    }
-
-    let data = await putUpdateUser(dataUpdate.id, username, role, image);
-    if (data && data.EC === 0) {
-      toast.success(data.EM);
-      handleClose();
-      await props.fetchListUsers();
-    }
-    if (data && data.EC !== 0) {
-      toast.error(data.EM);
     }
   };
 
@@ -121,6 +90,7 @@ const ModalUpdateUser = (props) => {
                 type="text"
                 className="form-control"
                 value={username}
+                disabled
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
@@ -161,13 +131,10 @@ const ModalUpdateUser = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => handleSubmitCreateUser()}>
-            Save
-          </Button>
         </Modal.Footer>
       </Modal>
     </>
   );
 };
 
-export default ModalUpdateUser;
+export default ModalViewUser;
