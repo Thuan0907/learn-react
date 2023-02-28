@@ -17,6 +17,7 @@ const ModalViewUser = (props) => {
     setRole("USER");
     setImage("");
     setPreviewImage("");
+    props.resetViewData();
   };
   const handleShow = () => setShow(true);
 
