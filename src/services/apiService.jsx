@@ -37,6 +37,7 @@ const postLogin = (userEmail, userPassword) => {
   return instance.post(`/api/v1/login`, {
     email: userEmail,
     password: userPassword,
+    delay: 5000,
   });
 };
 
