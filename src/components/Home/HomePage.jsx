@@ -1,17 +1,17 @@
 import React from "react";
 import videoHomepage from "../../assets/video-homepage.mp4";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage(props) {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const account = useSelector((state) => state.user.account);
-
-  console.log(
-    ">>> check isAuthenticated: ",
-    isAuthenticated,
-    ">>> check account: ",
-    account
-  );
+  const navigate = useNavigate();
+  // console.log(
+  //   ">>> check isAuthenticated: ",
+  //   isAuthenticated,
+  //   ">>> check account: ",
+  //   account
+  // );
   return (
     <div className="homepage-container">
       <video autoPlay muted loop>
@@ -24,7 +24,13 @@ export default function HomePage(props) {
           one. Create a type form instead—and make everyone happy.
         </div>
         <div className="title-3">
-          <button>Get's started. IT's free</button>
+          {isAuthenticated === false ? (
+            <button onClick={() => navigate("/login")}>
+              Get's started. IT's free
+            </button>
+          ) : (
+            <button onClick={() => navigate("/users")}>Doing Quiz Now</button>
+          )}
         </div>
       </div>
     </div>

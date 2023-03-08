@@ -1,4 +1,4 @@
-import instance from "../utils/axiosCustomize";
+import axios from "../utils/axiosCustomize";
 
 const postCreateNewUser = (email, password, username, role, image) => {
   // submit data
@@ -8,7 +8,7 @@ const postCreateNewUser = (email, password, username, role, image) => {
   data.append("username", username);
   data.append("role", role);
   data.append("userImage", image);
-  return instance.post("api/v1/participant", data);
+  return axios.post("api/v1/participant", data);
 };
 
 const putUpdateUser = (id, username, role, image) => {
@@ -18,35 +18,39 @@ const putUpdateUser = (id, username, role, image) => {
   data.append("username", username);
   data.append("role", role);
   data.append("userImage", image);
-  return instance.put("api/v1/participant", data);
+  return axios.put("api/v1/participant", data);
 };
 
 const getAllUsers = () => {
-  return instance.get("api/v1/participant/all");
+  return axios.get("api/v1/participant/all");
 };
 
 const deleteUser = (userId) => {
-  return instance.delete("api/v1/participant", { data: { id: userId } });
+  return axios.delete("api/v1/participant", { data: { id: userId } });
 };
 
 const getUserWithPaginate = (page, limit) => {
-  return instance.get(`api/v1/participant?page=${page}&limit=${limit}`);
+  return axios.get(`api/v1/participant?page=${page}&limit=${limit}`);
 };
 
 const postLogin = (userEmail, userPassword) => {
-  return instance.post(`/api/v1/login`, {
+  return axios.post(`api/v1/login`, {
     email: userEmail,
     password: userPassword,
-    delay: 5000,
+    delay: 3000,
   });
 };
 
 const postRegister = (email, password, username) => {
-  return instance.post(`/api/v1/register`, {
+  return axios.post(`/api/v1/register`, {
     email,
     password,
     username,
   });
+};
+
+const getQuizByUser = () => {
+  return axios.get("api/v1/quiz-by-participant");
 };
 
 export {
@@ -57,4 +61,5 @@ export {
   getUserWithPaginate,
   postLogin,
   postRegister,
+  getQuizByUser,
 };
