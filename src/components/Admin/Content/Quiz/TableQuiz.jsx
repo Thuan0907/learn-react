@@ -7,8 +7,8 @@ const TableQuiz = () => {
   const [listQuiz, setListQuiz] = useState([]);
   const [isShowModalUpdate, setIsShowModalUpdate] = useState(false);
   const [isShowModalDelete, setIsShowModalDelete] = useState(false);
-  const [dataUpdate, setDataUpdate] = useState();
-  const [dataDelete, setDataDelete] = useState();
+  const [dataUpdate, setDataUpdate] = useState({});
+  const [dataDelete, setDataDelete] = useState({});
 
   useEffect(() => {
     fetchQuiz();
@@ -26,13 +26,13 @@ const TableQuiz = () => {
   };
 
   const handleUpdate = (quiz) => {
-    setDataUpdate(quiz);
     setIsShowModalUpdate(true);
+    setDataUpdate(quiz);
   };
 
   const handleDelete = (quiz) => {
-    setDataDelete(quiz);
     setIsShowModalDelete(true);
+    setDataDelete(quiz);
   };
   return (
     <>
