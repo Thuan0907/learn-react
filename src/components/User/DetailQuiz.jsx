@@ -5,6 +5,7 @@ import _ from "lodash";
 import "./DetailQuiz.scss";
 import Question from "./Question";
 import ModalResult from "./ModalResult";
+import RightContent from "./Content/RightContent";
 
 const DetailQuiz = () => {
   const params = useParams();
@@ -85,19 +86,6 @@ const DetailQuiz = () => {
   };
 
   const handleFinishQuiz = async () => {
-    //   {
-    //     "quizId": 1,
-    //     "answers": [
-    //         {
-    //             "questionId": 1,
-    //             "userAnswerId": [3]
-    //         },
-    //         {
-    //             "questionId": 2,
-    //             "userAnswerId": [6]
-    //         }
-    //     ]
-    // }
     console.log(">>> check finish: ", dataQuiz);
 
     let payload = {
@@ -175,7 +163,9 @@ const DetailQuiz = () => {
         </div>
       </div>
 
-      <div className="right-content">Count down</div>
+      <div className="right-content">
+        <RightContent dataQuiz={dataQuiz} />
+      </div>
       <ModalResult
         show={isShowModalResult}
         setShow={setIsShowModalResult}
