@@ -1,7 +1,11 @@
 import Select from "react-select";
 import { useState, useEffect } from "react";
-import { getAllQuizForAdmin } from "../../../../services/apiService";
-import { getAllUsers } from "../../../../services/apiService";
+import {
+  getAllQuizForAdmin,
+  postAssignQuiz,
+  getAllUsers,
+} from "../../../../services/apiService";
+import { toast } from "react-toastify";
 
 const AssignQuiz = (props) => {
   const [listQuiz, setListQuiz] = useState([]);
@@ -21,12 +25,11 @@ const AssignQuiz = (props) => {
       let newQuiz = res.DT.map((item) => {
         return {
           value: item.id,
-          label: `${item.id} - ${item.description}`,
+          label: `${item.id} - ${item.name}`,
         };
       });
       setListQuiz(newQuiz);
     }
-    console.log(">>> check res fetchQuiz: ", res);
   };
 
   const fetchUser = async () => {
@@ -41,7 +44,13 @@ const AssignQuiz = (props) => {
       });
       setListUser(users);
     }
-    console.log(">>> check res fetchQuiz: ", res);
+  };
+
+  const handleAssign = async () => {
+    let res = await postAssignQuiz(selectedQuiz.value, selectedUser.value);
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+    } else toast.error(res.EM);
   };
 
   return (
@@ -64,7 +73,9 @@ const AssignQuiz = (props) => {
         />
       </div>
       <div>
-        <button className="btn btn-warning mt-3">Assign</button>
+        <button className="btn btn-warning mt-3" onClick={() => handleAssign()}>
+          Assign
+        </button>
       </div>
     </div>
   );

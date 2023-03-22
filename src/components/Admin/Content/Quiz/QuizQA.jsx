@@ -11,6 +11,7 @@ import {
   getAllQuizForAdmin,
   postCreateNewAnswerForQuestion,
   postCreateNewQuestionForQuiz,
+  getQuizWithQA,
 } from "../../../../services/apiService";
 import { toast } from "react-toastify";
 
@@ -45,6 +46,22 @@ const QuizQA = (props) => {
     fetchQuiz();
   }, []);
 
+  useEffect(() => {
+    if (selectedQuiz && selectedQuiz.value) {
+      fetchQuizWithQA();
+    }
+  }, [selectedQuiz]);
+
+  //return a promise that resolves with a File instance
+  function urltoFile(url, filename, mimeType) {
+    return fetch(url)
+      .then(function (res) {
+        return res.arrayBuffer();
+      })
+      .then(function (buf) {
+        return new File([buf], filename, { type: mimeType });
+      });
+  }
   const fetchQuiz = async () => {
     let res = await getAllQuizForAdmin();
     if (res && res.EC === 0) {
@@ -56,7 +73,28 @@ const QuizQA = (props) => {
       });
       setListQuiz(newQuiz);
     }
-    console.log(">>> check res fetchQuiz: ", res);
+  };
+
+  const fetchQuizWithQA = async () => {
+    let res = await getQuizWithQA(selectedQuiz.value);
+    if (res && res.EC === 0) {
+      // convert base64 to File object
+      let newQA = [];
+      for (let i = 0; i < res.DT.qa.length; i++) {
+        let q = res.DT.qa[i];
+        if (q.imageFile) {
+          q.imageName = `question-${q.id}.png`;
+          q.imageFile = await urltoFile(
+            `data:image/png;base64,${q.imageFile}`,
+            `question-${q.id}.png`,
+            "image/png"
+          );
+        }
+        newQA.push(q);
+      }
+      setQuestions(newQA);
+      console.log(">>> check res : ", res);
+    }
   };
 
   const handleAddRemoveQuestion = (type, id) => {
@@ -196,29 +234,6 @@ const QuizQA = (props) => {
       toast.error(`Not empty description for Question ${indexQ1 + 1}`);
       return;
     }
-
-    // khong theo trinh tu cau hoi và cau tra loi
-    // // submit questions
-    // await Promise.all(
-    //   questions.map(async (question) => {
-    //     const q = await postCreateNewQuestionForQuiz(
-    //       +selectedQuiz.value,
-    //       question.description,
-    //       question.imageFile
-    //     );
-
-    //     // submit answers
-    //     await Promise.all(
-    //       question.answers.map(async (answer) => {
-    //         await postCreateNewAnswerForQuestion(
-    //           answer.description,
-    //           answer.isCorrect,
-    //           q.DT.id
-    //         );
-    //       })
-    //     );
-    //   })
-    // );
 
     // submit question
     for (const question of questions) {

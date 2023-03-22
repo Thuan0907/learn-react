@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+import React from "react";
 import { deleteQuizForAdmin } from "../../../../services/apiService";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 const ModalDeleteQuiz = (props) => {
   const { show, setShow, dataDelete } = props;
-
-  console.log("dataDelete: ", dataDelete);
 
   const handleClose = () => setShow(false);
 

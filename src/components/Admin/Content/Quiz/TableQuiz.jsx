@@ -22,7 +22,6 @@ const TableQuiz = () => {
     if (res && res.EC === 0) {
       setListQuiz(res.DT);
     }
-    console.log(">>> check res fetchQuiz: ", res);
   };
 
   const handleUpdate = (quiz) => {
