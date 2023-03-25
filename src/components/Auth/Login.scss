@@ -18,8 +18,10 @@
     height: 45px;
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: flex-end;
     padding: 0 100px;
+    gap: 10px;
+
     button {
       padding: 5px 15px;
       margin-left: 15px;
