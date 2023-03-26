@@ -45,6 +45,9 @@ const DetailQuiz = () => {
             answers.push(item.answers);
           });
 
+          // arrange in sequence
+          answers = _.orderBy(answers, ["id"], ["asc"]);
+
           return { questionId: key, answers, questionDescription, image };
         })
         .value();
